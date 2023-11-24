@@ -1,0 +1,46 @@
+﻿@model Filme
+
+@{
+    ViewData["Title"] = "Info";
+}
+
+<h1>@Model.Titulo</h1>
+
+<table class="table table-striped">
+    <tr>
+        <th>Sinopse</th>
+        <th>Duração</th>
+        <th>Bilheteria</th>
+        <th>Data Lançamento</th>
+        <th>Categoria</th>
+        <th>Disponível</th>
+        <th>Produtora</th>
+    </tr>
+    <tr>
+        <td>@Model.Sinopse</td>
+        <td>@Model.Duracao</td>
+        <td>@Model.Bilheteria</td>
+        <td>@Model.DataLancamento.ToShortDateString()</td>
+        <td>@Model.Categoria</td>
+        <td>@(Model.Disponivel?"Sim":"Não")</td>
+        <td>@Model.Produtora?.Nome</td>
+    </tr>
+</table>
+
+<div class="d-flex justify-content-between">
+    <h2>Atores</h2>
+    <a asp-action="add" asp-route-id="@Model.FilmeId" 
+                    class="btn btn-primary h-25">+</a>
+</div>
+
+<table class="table">
+    <tr>
+        <th>Nome</th>
+    </tr>
+    @foreach (var item in ViewBag.atores)
+    {
+        <tr>
+            <td>@item.Nome</td>
+        </tr>
+    }
+</table>
